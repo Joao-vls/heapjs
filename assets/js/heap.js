@@ -119,6 +119,10 @@ function atualizarLista() {
             botaoRealizado.appendChild(iconeCheck);
 
             divTarefa.appendChild(botaoRealizado);
+            botaoRealizado.addEventListener("click",()=>{
+                he.extrairMax();
+                atualizarLista();
+            })
         }
         document.querySelector(".tarefas").appendChild(divTarefa);
     }
