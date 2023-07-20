@@ -1,0 +1,103 @@
+function criaHeapEs(posiPai) {
+    let pai = document.querySelectorAll(".heap_posi");
+    let divHeap = document.createElement("div");
+    divHeap.classList.add("heap_posi");
+    let po = 2 * posiPai + 1;
+    console.log("di");
+    divHeap.style.top = pai[posiPai].offsetTop + 60 + "px";
+    divHeap.style.left = pai[posiPai].offsetLeft - 100 + "px";
+    console.log(pai[posiPai], pai[pai.length - 1], pai.length);
+    //console.log(pai[posiPai].offsetLeft,vo.lastChild.offsetLeft);
+    criaP(divHeap, po);
+    document.querySelector(".heap_demonstracao").appendChild(divHeap);
+}
+function criaHeapDi(posiPai) {
+    let pai = document.querySelectorAll(".heap_posi");
+    let divHeap = document.createElement("div");
+    divHeap.classList.add("heap_posi");
+    let po = 2 * posiPai + 2;
+    console.log("es", pai[posiPai], pai.length);
+    let v = 100;
+    if (!((pai.length + 1) % 3)) {
+        v = 140;
+    }
+    divHeap.style.top = pai[posiPai].offsetTop + 60 + "px";
+    divHeap.style.left = pai[posiPai].offsetLeft + v + "px";
+    criaP(divHeap, po);
+    document.querySelector(".heap_demonstracao").appendChild(divHeap);
+}
+function criaP(divHeap, i) {
+    let paragrafo = document.createElement("p");
+    paragrafo.textContent = he.heap[i].valor;
+    divHeap.appendChild(paragrafo);
+    let paragrafo1 = document.createElement("p");
+    paragrafo1.textContent = i;
+    divHeap.appendChild(paragrafo1);
+}
+function heap() {
+    var pai = document.querySelector(".heap_demonstracao");
+    while (pai.firstChild) {
+        pai.removeChild(pai.firstChild);
+    }
+    for (let i = 0; i < he.heap.length; i++) {
+        heapCriar(i);
+    }
+}
+function heapCriar(i) {
+    let pai = document.querySelectorAll(".heap_posi");
+    let divHeap = document.createElement("div");
+    divHeap.classList.add("heap_posi");
+    divHeap.style.top = ((pai[pai.length - 1]) ? (pai[pai.length - 1].offsetTop + 60) : 0) + "px";
+    if (!pai.length) {
+        criaP(divHeap, 0);
+    } else {
+        console.log(pai.length);
+        criaP(divHeap, i);
+    }
+    document.querySelector(".heap_demonstracao").appendChild(divHeap);
+}
+
+
+
+// function maiorTexto() {
+//     var maior = new maxHeaper();
+//     var textos = document.querySelectorAll("p");
+//     textos.forEach(e => {
+//         maior.inserir(e.innerHTML);
+//     }
+//     )
+
+//     for (let i = 0; i < textos.length; i++) {
+//         textos[i].innerHTML = maior.heap[i];
+//     }
+// }
+// window.addEventListener('keydown', function (event) {
+//     console.log(event.key);
+//     if (event.key === "ArrowRight") {
+//         console.log('O usuário pressionou Enter');
+//     }
+// });
+
+// array.forEach(element => {
+//     he.inserir(element);
+// });
+// var x = (typeof valor == "string" && !isNaN(+valor) && !texto) ? "number" :
+// (!texto && (typeof valor=="string" || typeof valor=="number")) ?
+// typeof valor : (((typeof valor == "string" && !isNaN(+valor)) || typeof valor=="number") && typeof texto=="string") ? "object" : 0;
+// let pai = document.querySelector(".heap_demonstracao");
+// //heapApaga();
+// console.log(!pai?.firstChild, pai.lastChild);
+// if (!pai.firstChild) {
+//     console.log(45);
+//     let divHeap = document.createElement("div");
+//     divHeap.classList.add("heap_posi");
+//     criaP(divHeap, 0)
+//     document.querySelector(".heap_demonstracao").appendChild(divHeap);
+// } else {
+//     let posi = document.querySelectorAll(".heap_posi").length;
+//     if (posi % 2) {
+//         criaHeapEs(Math.floor((posi - 1) / 2));
+//     } else {
+//         criaHeapDi(Math.floor((posi - 1) / 2));
+//     }
+// }

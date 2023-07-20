@@ -33,7 +33,7 @@ class maxHeaper {
         }
     }
     inserir(valor) {
-        var x = typeof valor;
+        let x = typeof valor;
 
         if (!(this.heap.length)) {
             this.tipo = x;
@@ -88,14 +88,30 @@ class maxHeaper {
     }
 
 }
-var he = new maxHeaper();
+let he = new maxHeaper();
 
+function pegarInput() {
+    var prio = document.querySelectorAll(".caneta input");
+    if (prio[1].value) {
+        var obj = {
+            valor: parseInt(prio[1].value),
+            texto: prio[0].value
+        }
+        prio[1].value = "";
+        prio[0].value = "";
+        he.inserir(obj);
+        atualizarLista();
+        console.log(he.heap);
+    }
+}
 document.querySelector(".caneta button").addEventListener("click", pegarInput);
 
 function atualizarLista() {
     var pai = document.querySelector(".tarefas");
+    var hp = document.querySelector(".heap_demonstracao");
     while (pai?.firstChild) {
         pai.removeChild(pai.firstChild);
+        hp.removeChild(hp.lastChild);
     }
     for (let i = 0; i < he.heap.length; i++) {
 
@@ -119,54 +135,35 @@ function atualizarLista() {
             botaoRealizado.appendChild(iconeCheck);
 
             divTarefa.appendChild(botaoRealizado);
-            botaoRealizado.addEventListener("click",()=>{
+            botaoRealizado.addEventListener("click", () => {
                 he.extrairMax();
-                atualizarLista();
+                animaPorta();
+
             })
         }
+        bonecoCriar(i);
         document.querySelector(".tarefas").appendChild(divTarefa);
     }
 
 }
+function bonecoCriar(i) {
+    let div = document.createElement("div");
+    div.classList.add("paciente");
+    let paragrafo = document.createElement("p");
+    paragrafo.textContent = he.heap[i].valor;
+    div.appendChild(paragrafo);
+    paragrafo = document.createElement("p");
+    paragrafo.textContent = i;
+    div.appendChild(paragrafo);
+    div.style.left = (i) ? document.querySelectorAll(".paciente")[i - 1].offsetLeft + 130 + "px" : 0;
+    document.querySelector(".heap_demonstracao").appendChild(div);
 
-function pegarInput() {
-    var prio = document.querySelectorAll(".caneta input");
-    if (prio[1].value) {
-        var obj = {
-            valor: parseInt(prio[1].value),
-            texto: prio[0].value
-        }
-        prio[1].value = "";
-        prio[0].value = "";
-        he.inserir(obj);
-        atualizarLista();
-        console.log(he.heap);
-    }
 }
-
-
-// function maiorTexto() {
-//     var maior = new maxHeaper();
-//     var textos = document.querySelectorAll("p");
-//     textos.forEach(e => {
-//         maior.inserir(e.innerHTML);
-//     }
-//     )
-
-//     for (let i = 0; i < textos.length; i++) {
-//         textos[i].innerHTML = maior.heap[i];
-//     }
-// }
-// window.addEventListener('keydown', function (event) {
-//     console.log(event.key);
-//     if (event.key === "ArrowRight") {
-//         console.log('O usuário pressionou Enter');
-//     }
-// });
-
-// array.forEach(element => {
-//     he.inserir(element);
-// });
-// var x = (typeof valor == "string" && !isNaN(+valor) && !texto) ? "number" :
-// (!texto && (typeof valor=="string" || typeof valor=="number")) ?
-// typeof valor : (((typeof valor == "string" && !isNaN(+valor)) || typeof valor=="number") && typeof texto=="string") ? "object" : 0;
+function animaPorta() {
+    const porta = document.querySelector(".porta");
+    porta.style.animation = "";
+    setTimeout(() => {
+        porta.style.animation = "po 1s alternate-reverse"
+        atualizarLista();
+    }, 2);
+}
